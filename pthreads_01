@@ -1,0 +1,42 @@
+#include<iostream>
+#include<pthread.h>
+#include<time.h>
+#include<iomanip>
+#include<random>
+#define max 16000
+#define max_thread 8
+int a[max];
+int sum[max_thread]={0};
+int segment=0;
+void * sum_array(void* arg){
+	int seg=segment++;
+	for(int i=seg*(max/max_thread);i<(seg+1)*(max/max_thread);i++){
+		sum[seg]+=a[i];
+	}
+}
+int main(){
+	clock_t t1,t2;
+	int i,total=0;
+	float avg;
+	for(i=0;i<max;i++){
+		a[i]= rand() % 100;
+		
+	}
+	pthread_t threads[max_thread];
+	t1=clock();
+	for(i=0;i<max_thread;i++){
+		pthread_create(&threads[i],NULL,*sum_array,(void*)NULL);	
+	}
+	for(i=0;i<max_thread;i++){	
+		pthread_join(threads[i],NULL);
+	}
+	for(i=0;i<max_thread;i++){
+		total+=sum[i];
+	}		
+	avg=total/max;
+	t2=clock();
+	std::cout<<"\nsum: "<<total<<"\n";
+	std::cout<<"avg: "<<avg<<"\n";
+	std::cout<<"time: "<<(t2-t1)/(long double)CLOCKS_PER_SEC<<"\n";
+	return 0;
+}
