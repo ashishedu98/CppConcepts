@@ -1,0 +1,91 @@
+#include <iostream>
+
+using namespace std;
+
+
+------------------------------------------------------------------
+//Sum on N natural nos. method
+int check(int arr[],int n){
+   
+	int reqsum=0,sum=0,retsum=0;
+    
+	reqsum=(n*(n+1))/2;
+    
+	for(int i=0;i<n-1;i++)
+	{
+        
+		sum=sum+arr[i];
+    
+	}
+    
+	retsum=reqsum-sum;
+    
+	return retsum;
+
+}
+
+
+------------------------------------------------------------------
+//XOR method
+int check(int arr[],int n)
+{
+    
+	int valarr=0,val=0,rem=0;
+    
+	for(int i=1;i<=n;i++)
+	{
+        
+		valarr=valarr^i;
+    
+	}
+    
+	for(int i=0;i<n-1;i++)
+	{
+        
+		val=val^arr[i];
+    
+	}
+    
+	rem=valarr^val;
+    
+	return rem;
+
+}
+
+
+------------------------------------------------------------------
+//main 
+int main() 
+{
+	int t;
+	
+	cin>>t;
+	
+	while(t--)
+	{
+	    
+		int n;
+	    
+		cin>>n;
+	    
+		int arr[n-1];
+	    
+		for(int i=0;i<n-1;i++)
+		{
+	        
+			cin>>arr[i];
+	       
+	    
+		}
+	    
+		cout<<check(arr,n)<<endl;
+	
+	}
+	
+	return 0;
+
+}
+
+
+
+------------------------------------------------------------------
