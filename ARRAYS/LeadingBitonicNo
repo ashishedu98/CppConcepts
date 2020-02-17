@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+int checkbitonic(int arr[],int n){
+    int left[n],right[n];
+    int l_max=left[0]=arr[0],r_min=right[n-1]=arr[n-1];
+    for(int i=1;i<n;i++){
+        l_max=max(l_max,arr[i]);
+        left[i]=l_max;
+    }
+    for(int i=n-2;i>=0;i--){
+        r_min=min(r_min,arr[i]);
+        right[i]=r_min;
+    }
+    for(int i=1;i<n-1;i++){
+        if(arr[i]<=right[i] && arr[i]>=left[i])
+            return arr[i];
+    }
+    return -1;
+    
+}
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    int arr[n];
+	    for(int i=0;i<n;i++)
+	        cin>>arr[i];
+	    cout<<checkbitonic(arr,n)<<endl;
+	}
+	return 0;
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Input:
+3
+4
+4 2 5 7
+3
+11 9 12
+6
+4 3 2 7 8 9
+
+Output:
+5
+-1
+7
