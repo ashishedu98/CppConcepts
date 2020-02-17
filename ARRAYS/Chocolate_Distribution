@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+int minchoc(int arr[],int n,int k){
+    sort(arr,arr+n);
+    int min=INT_MAX;
+    for(int i=0;i<=n-k;i++){
+        int ans=arr[i+k-1]-arr[i];
+        if(ans<=min)
+            min=ans;
+    }
+    return min;
+}
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,k;
+	    cin>>n;
+	    int arr[n];
+	    for(int i=0;i<n;i++)
+	        cin>>arr[i];
+	    cin>>k;
+	    cout<<minchoc(arr,n,k)<<endl;
+	    
+	}
+	return 0;
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Input:
+2
+8
+3 4 1 9 56 7 9 12
+5
+7
+7 3 2 4 9 12 56
+3
+
+Output:
+6
+2
