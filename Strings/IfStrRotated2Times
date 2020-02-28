@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+#include<string.h>
+using namespace std;
+int main() {
+    int t;
+    cin>>t;
+    while(t--){
+        string s1,s2,sr,sl;
+        cin>>s1;
+        cin>>s2;
+        sr=s2+s2;
+        sl=s1+s1;
+        if(sr.find(s1)==2 ||sl.find(s2)==2){
+            cout<<"1"<<endl;
+        }
+    else    
+        cout<<"0"<<endl;
+    }
+	//code
+	return 0;
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Input:
+2
+amazon
+azonam
+geeksforgeeks
+geeksgeeksfor
+
+Output:
+1
+0
