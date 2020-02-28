@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+#include<string.h>
+using namespace std;
+void per(string str){
+    sort(str.begin(),str.end());
+    do{
+        cout<<str<<" ";
+    }while(next_permutation(str.begin(),str.end()));
+}
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    string str;
+	    cin>>str;
+	    per(str);
+	    cout<<endl;
+	}
+	return 0;
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+Input:
+2
+ABC
+ABSG
+
+Output:
+ABC ACB BAC BCA CAB CBA 
+ABGS ABSG AGBS AGSB ASBG ASGB BAGS BASG BGAS BGSA BSAG BSGA GABS GASB GBAS GBSA GSAB GSBA SABG SAGB SBAG SBGA SGAB SGBA
