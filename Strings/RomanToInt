@@ -1,0 +1,62 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int roman_to_int(string roman)
+{
+    map<char,int> hmap;
+    hmap['I']=1;
+    hmap['V']=5;
+    hmap['X']=10;
+    hmap['L']=50;
+    hmap['C']=100;
+    hmap['D']=500;
+    hmap['M']=1000;
+    char temp,prev;
+    int res=0,i=0;
+    //res += hmap[roman.at(0)];
+    if(roman.length()<=1)
+    {
+        return hmap[roman.at(0)];
+    }
+    else
+    {
+        while(i<roman.size())
+        {
+            if(hmap[roman[i]]<hmap[roman[i+1]])
+            {
+                res += hmap[roman[i+1]]-hmap[roman[i]];
+                i += 2;
+            }
+            else
+            {
+                res += hmap[roman[i]];
+                i++;
+            }
+        }
+    return res;
+    }
+}
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t!=0)
+	{
+	    string roman;
+	    cin>>roman;
+	    int res = roman_to_int(roman);
+	    cout<<res<<endl;
+	    t--;
+	}
+	return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------
+
+INPUT:
+2
+MMMDCCXCIV
+XCVIII
+
+OUTPUT:
+3794
+98
