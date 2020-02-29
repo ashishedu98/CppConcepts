@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    int t; cin>>t;
+    while(t--)
+    {
+        int n,x; cin>>n;
+        string str,ans;
+        vector<string> s;
+        int m=INT_MAX;
+        for(int i=0;i<n;i++)
+        {
+            cin>>str;
+            x=str.length();
+            m=min(m,x);
+            s.push_back(str);
+        }
+        //cout<<m;
+        int j=0,y=0;
+        for(j=0;j<m;j++)
+        {  
+            for(int i=0;i<n-1;i++)
+            {
+                if(s[i][j]==s[i+1][j])
+                {
+
+                }
+                else
+                {
+                    y=1;
+                    break;
+                }
+            }
+            if(y==1) break;
+        }
+        
+        if(y==1)
+        {
+            if(j==0)
+            cout<<-1;
+            else
+            {
+                for(int i=0;i<j;i++)
+                {
+                    cout<<s[0][i];
+                }
+            }
+        }
+        int z;
+        if(y==0)
+        {
+            for(int i=0;i<n;i++)
+            {
+                z=s[i].length();
+                if(z==j)
+                {
+                    cout<<s[i];
+                    break;
+                }
+            }
+        }
+        cout<<endl;
+    }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Input:
+2
+4
+geeksforgeeks geeks geek geezer
+3
+apple ape april
+
+Output:
+gee
+ap
