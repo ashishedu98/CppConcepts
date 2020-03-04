@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+int f(int n) {
+    if (n < 5) {
+    return n;
+    }
+    return max(4*f(n-5), 3*f(n-4));
+}
+int main() 
+{
+    int nCases; cin >> nCases;
+    while (nCases--)
+    {
+        int n; cin >> n;
+        cout<<f(n)<<endl;
+    }
+	return 0;
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+Input:
+3
+3
+7
+16
+
+Output:
+3
+9
+108
