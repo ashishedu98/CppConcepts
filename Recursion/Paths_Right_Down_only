@@ -1,0 +1,33 @@
+#include <iostream>
+#include<string.h>
+using namespace std;
+int checkpaths(int row,int col){
+    if(row==1 ||col==1)
+        return 1;
+    return checkpaths(row-1,col)+checkpaths(row,col-1);
+    
+        
+}
+int main() {
+	//code
+	int t;
+    cin>>t;
+    while(t--){
+        int row,col;
+        cin>>row>>col;
+        cout<<checkpaths(row,col)<<endl;
+      
+        
+    }
+	return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+Input
+2
+3 3
+2 8
+
+Output
+6
+8
