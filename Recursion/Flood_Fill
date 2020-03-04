@@ -1,0 +1,124 @@
+#include <bits/stdc++.h>
+using namespace std;
+int arr[100][100];
+void floodfill(int x,int y,int key,int row,int col,int new_key){
+    if(x<0 ||x>row ||y<0 ||y>col )
+        return;
+    else if(arr[x][y]==key)
+    {
+        arr[x][y]=new_key;
+        floodfill(x+1,y,key,row,col,new_key);
+        floodfill(x-1,y,key,row,col,new_key);
+        floodfill(x,y+1,key,row,col,new_key);
+        floodfill(x,y-1,key,row,col,new_key);
+    }
+    else
+        return;
+}
+
+int main() {
+	//code
+	int t;
+	memset(arr,-1,sizeof(arr));
+	cin>>t;
+	while(t--){
+	    int row,col;
+	    cin>>row>>col;
+	    for(int i=0;i<row;i++){
+	        for(int j=0;j<col;j++){
+	            cin>>arr[i][j];
+	            
+	        }
+	    }
+	    int x,y,new_key;
+	    cin>>x>>y>>new_key;
+	    int key=arr[x][y];
+	    floodfill(x,y,key,row,col,new_key);
+	    for(int i=0;i<row;i++){
+	        for(int j=0;j<col;j++){
+	            cout<<arr[i][j]<<" ";
+	        }
+	    }
+	    cout<<endl;
+	}
+	return 0;
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+DFS :
+
+#include<bits/stdc++.h>
+#define ll long long
+
+using namespace std;
+
+bool isValid(vector <vector <int> > v, int x, int y) {
+    if(x >= v.size() || x < 0)
+        return false;
+    if(y >= v[0].size() || y < 0)
+        return false;
+    return true;
+}
+
+int corX[4] = {1, -1, 0, 0};
+int corY[4] = {0, 0, 1, -1};
+
+int main()
+ {
+	int t, n, m, x, y, k;
+	cin >> t;
+	while(t--) {
+	    cin >> n >> m;
+	    vector <vector <int> > v(n, vector <int> (m, 0));
+	    for(int i = 0; i < n; i++) {
+	        for(int j = 0; j < m; j++)
+	            cin >> v[i][j];
+	    }
+	    
+	    cin >> x >> y >> k;
+	    stack < pair<int,int> > s;
+	    s.push({x, y});
+	    int old_color = v[x][y];
+	    v[x][y] = k;
+	    while(!s.empty()) {
+	        auto p = s.top();
+	        s.pop();
+	        
+	        for(int i = 0; i < 4; i++) {
+	            int xx = p.first + corX[i];
+	            int yy = p.second + corY[i];
+	            if(isValid(v, xx, yy) && v[xx][yy] == old_color){
+	                v[xx][yy] = k;
+	                s.push({xx, yy});
+	            }
+	        }
+	    }
+	    
+	    for(int i = 0; i < n; i++) {
+	        for(int j = 0; j < m; j++)
+	            cout << v[i][j] << " ";
+	 
+	    }
+	    cout << endl;
+	}
+	return 0;
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Input:
+3
+3 4
+0 1 1 0 1 1 1 1 0 1 2 3
+0 1 5
+2 2
+1 1 1 1
+0 1 8
+4 4 
+1 2 3 4 1 2 3 4 1 2 3 4 1 3 2 4
+0 2 9
+
+Output:
+0 5 5 0 5 5 5 5 0 5 2 3
+8 8 8 8
+1 2 9 4 1 2 9 4 1 2 9 4 1 3 2 4
