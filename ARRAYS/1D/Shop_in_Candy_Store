@@ -1,0 +1,50 @@
+#include <iostream>
+#include<algorithm>
+using namespace std;
+void min_max(int cost[],int n,int k){
+    sort(cost,cost+n);
+    int min,max,min_count=n,max_count=n;
+    min=0,max=0;
+    for(int i=0;i<n;i++){
+        if(min_count>0){
+            min+=cost[i];
+            min_count=min_count-(k+1);
+        }
+        else
+            {break;}
+    }
+    for(int i=n-1;i>=0;i--){
+        if(max_count>0){
+            max+=cost[i];
+            max_count=max_count-(k+1);
+        }
+        else
+            {break;}
+    }
+    cout<<min<<" "<<max<<endl;
+}
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,k;
+	    cin>>n>>k;
+	    int cost[n];
+	    for(int i=0;i<n;i++){
+	        cin>>cost[i];
+	    }
+	    min_max(cost,n,k);
+	}
+	return 0;
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Input    
+ 1
+ 4  2
+ 3 2 1 4
+
+Output
+ 3 7
