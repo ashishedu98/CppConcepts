@@ -1,0 +1,76 @@
+DP:
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pp long long int
+#define mod 1000000007
+pp binomial(pp n, pp k)
+{
+    pp arr[n+1][k+1];
+    for(pp i=1;i<=n;i++)
+    {
+        for(pp j=0;j<=min(i,k);j++)
+        {
+            if(j==0 or j==i) arr[i][j]=1;
+            else arr[i][j] = ( (arr[i-1][j-1]%mod) + (arr[i-1][j]%mod) )%mod;
+        }
+    }
+    return arr[n][k];
+}
+int main()
+{
+  pp t; cin>>t;
+    while(t--)
+    {
+        pp n,k; cin>>n>>k;
+        if(n>=k)
+        {
+        pp ans = binomial(n,k);
+        cout<<ans<<'\n';
+        }
+        else cout<<"0\n";
+    }
+    return 0;
+}
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Iterative:
+
+#include <iostream>
+#include<boost/multiprecision/cpp_int.hpp>
+using boost::multiprecision::cpp_int;
+using namespace std;
+cpp_int combination(int n,int r){
+    cpp_int n_fact=1,r_fact=1,n_r_fact=1;
+    for(int i=n;i>0;i--)
+        n_fact*=i;
+    for(int i=r;i>0;i--)
+        r_fact*=i;
+    int temp=n-r;
+    for(int i=temp;i>0;i--)
+        n_r_fact*=i;
+    cpp_int ans=((n_fact)/(n_r_fact*r_fact))%1000000007;
+    return ans;
+    
+}
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,r;
+	    cin>>n>>r;
+	    cout<<combination(n,r)<<endl;
+	}
+	return 0;
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------
+INPUT:
+1
+778 116
+
+OUTPUT:
+735309323
