@@ -1,0 +1,55 @@
+#include <iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+bool compare(string s1,string s2)
+{
+    string s1s2=s1+s2;
+    string s2s1=s2+s1;
+    return s1s2>s2s1;
+}
+void inputarr(vector<string> &v,int n)
+{
+    int no;
+    for(int i=0;i<n;i++)
+    {
+        cin>>no;
+        v.push_back(to_string(no));
+    }
+    sort(v.begin(),v.end(),compare);
+    
+}
+void printarr(vector<string> v,int n)
+{
+    for(int i=0;i<v.size();i++)
+    cout<<v[i];
+    
+    cout<<endl;
+}
+int main() {
+	//code
+	int tc;
+	cin>>tc;
+	while(tc--)
+	{
+	    int n;
+	    cin>>n;
+	    vector<string>v;
+	    inputarr(v,n);
+	    printarr(v,n);
+	}
+	return 0;
+}
+
+-----------INPUT-----------
+
+2
+5
+3 30 34 5 9
+4
+54 546 548 60
+----------OUTPUT----------
+
+9534330
+6054854654
