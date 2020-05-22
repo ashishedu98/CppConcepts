@@ -1,0 +1,154 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void sum(int q[],int n,int m,int s,vector <int> &v,int j,bool &w)
+{
+    if(s==m && v.size()==4)
+    {  w=true;
+        for(int i=0;i<v.size();i++)
+        cout<<v[i]<<" ";
+        cout<<"$";
+        return;
+    }
+    if(v.size()>4)
+    return;
+    
+    for(int i=j;i<n;i++)
+    {
+        v.push_back(q[i]);
+        
+        sum(q,n,m,s+q[i],v,i+1,w);
+        
+        v.pop_back();
+        int z=q[i];
+        while(q[i]==z)
+            i++;
+i--;
+    }
+    
+    
+}
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n,m;
+	    cin>>n>>m;
+	    int q[n];
+	    bool w=false;
+	    for(int i=0;i<n;i++)
+	    {
+	        int x;
+	        cin>>x;
+	        q[i]=x;
+	    }
+	    sort(q,q+n);
+	    vector <int> v;
+	    sum(q,n,m,0,v,0,w);
+	    if(!w)
+	    cout<<-1;
+	    cout<<endl;
+	}
+	return 0;
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+void print_all_quadruples(std::vector<int> &vec, int n, int sum)
+{
+    std::sort(vec.begin(), vec.end());
+
+    // stores the indices of pairs of numbers, whose
+    // sum is less or equal than the 'sum' argument value
+    std::map<int, std::set<std::pair<int, int>>> m;
+
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            int k = vec[i] + vec[j];
+            if (k <= sum) {
+                m[k].insert({std::min(i, j), std::max(i, j)});
+            }
+        }
+    }
+
+    std::set<std::vector<int>> ret;
+
+    for (const auto &kv : m) {
+        const auto &pairs1 = kv.second;
+
+        auto it = m.find(sum - kv.first);
+        if (it == m.end()) {
+            continue;
+        }
+
+        const auto &pairs2 = it->second;
+
+        for (const auto &pair1 : pairs1) {
+            for (const auto &pair2 : pairs2) {
+                std::set<int> indices;
+                indices.insert(pair1.first);
+                indices.insert(pair1.second);
+                indices.insert(pair2.first);
+                indices.insert(pair2.second);
+                if (indices.size() == 4) {
+                    // all 4 indices were distinct,
+                    // a solution has been found
+                    std::vector<int> vals;
+                    for (const auto &index: indices) {
+                        vals.push_back(vec[index]);
+                    }
+                    ret.insert(vals);
+                }
+            }
+        }
+    }
+
+    if (ret.empty()) {
+        std::cout << "-1\n";
+        return;
+    }
+
+    for (const auto &vec : ret) {
+        for (const auto &val : vec) {
+            std::cout << val << " ";
+        }
+        std::cout << "$";
+    }
+    std::cout << "\n";
+}
+
+int main()
+{
+    std::istream &is = std::cin;
+
+    int t;
+    is >> t;
+    while (t--) {
+        int n, sum;
+        is >> n >> sum;
+
+        std::vector<int> vec(n);
+        for (int i = 0; i < n; ++i) {
+            is >> vec[i];
+        }
+
+        print_all_quadruples(vec, n, sum);
+    }
+}
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Input:
+2
+5 3
+0 0 2 1 1 
+7 23
+10 2 3 4 5 7 8
+
+Output:
+0 0 1 2 $
+2 3 8 10 $2 4 7 10 $3 5 7 8 $
